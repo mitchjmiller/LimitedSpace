@@ -1,8 +1,8 @@
 using UnityEngine;
 
 public class Battery : MonoBehaviour {
-  [SerializeField] private float powerValue = 15f;
-  [SerializeField] private float lifetime = 30f;
+  [SerializeField] private float powerValue = 20f;
+  [SerializeField] private float lifetime = 120f;
   private Rigidbody rb;
 
   private void Awake() {
@@ -10,7 +10,7 @@ public class Battery : MonoBehaviour {
   }
 
   public void Start() {
-    rb.AddRelativeTorque(Random.onUnitSphere * 15f);
+    rb.AddRelativeTorque(Random.onUnitSphere, ForceMode.VelocityChange);
   }
 
   public void Update() {
@@ -22,7 +22,7 @@ public class Battery : MonoBehaviour {
 
   private void OnTriggerEnter(Collider other) {
     if (other.TryGetComponent<ShipController>(out ShipController ship)) {
-      ship.AddPower(powerValue);
+      ship.AdjustPower(powerValue);
       Destroy(gameObject);
     }
   }

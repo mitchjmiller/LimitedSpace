@@ -5,8 +5,8 @@ public class InputManager : MonoBehaviour {
   public static InputManager Instance { get; private set; }
   private PlayerInputActions actions;
 
-  public UnityEvent OnBoostStart = new UnityEvent();
-  public UnityEvent OnBoostEnd = new UnityEvent();
+  public UnityEvent OnBoostPerformed = new UnityEvent();
+  public UnityEvent OnBoostCancelled = new UnityEvent();
 
   private void Awake() {
     if (Instance != null) {
@@ -31,11 +31,11 @@ public class InputManager : MonoBehaviour {
   }
 
   private void Boost_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
-    OnBoostStart.Invoke();
+    OnBoostPerformed.Invoke();
   }
 
   private void Boost_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
-    OnBoostEnd.Invoke();
+    OnBoostCancelled.Invoke();
   }
 
   public Vector2 GetMovementVector() {
@@ -44,6 +44,7 @@ public class InputManager : MonoBehaviour {
     return movementVector;
   }
 
+  public float GetRoll() => actions.Player.Roll.ReadValue<float>();
   public bool GetAccelerate() => actions.Player.Accelerate.ReadValue<float>() > 0.5f;
   public bool GetBoost() => actions.Player.Boost.ReadValue<float>() > 0.5f;
   public bool GetShoot() => actions.Player.Shoot.ReadValue<float>() > 0.5f;

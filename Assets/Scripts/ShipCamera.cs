@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 
 public class ShipCamera : MonoBehaviour {
+  [SerializeField] private ShipController ship;
   private CinemachineVirtualCamera virtualCam;
   private CinemachineTransposer transposer;
 
@@ -12,14 +13,15 @@ public class ShipCamera : MonoBehaviour {
     virtualCam = GetComponent<CinemachineVirtualCamera>();
     transposer = virtualCam.GetCinemachineComponent<CinemachineTransposer>();
   }
+
   private void Start() {
-    InputManager.Instance.OnBoostStart.AddListener(OnBoostStart);
-    InputManager.Instance.OnBoostEnd.AddListener(OnBoostEnd);
+    ship.OnBoostStart.AddListener(OnBoostStart);
+    ship.OnBoostEnd.AddListener(OnBoostEnd);
   }
 
   private void OnDestroy() {
-    InputManager.Instance.OnBoostStart.RemoveListener(OnBoostStart);
-    InputManager.Instance.OnBoostEnd.RemoveListener(OnBoostEnd);
+    ship.OnBoostStart.RemoveListener(OnBoostStart);
+    ship.OnBoostEnd.RemoveListener(OnBoostEnd);
   }
 
   private void OnBoostStart() {
