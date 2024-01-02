@@ -1704,7 +1704,7 @@ MonoBehaviour:
   spawnDistanceVariability: 25
   spawnInterval: 3
   spawnables:
-  - prefab: {fileID: 6701775134401449990, guid: 2663f7c203935a84f90bc799fd78497c,
+  - prefab: {fileID: 7048995626948928332, guid: 2663f7c203935a84f90bc799fd78497c,
       type: 3}
     weight: 50
   - prefab: {fileID: 3552727438798822291, guid: 1ef665e8dbb6c0a4b96e3f78dd641b16,
